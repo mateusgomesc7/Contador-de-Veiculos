@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <p><b>cv.Mat</b></p>
+    <p>
+        OpenCV.js saves images as cv.Mat type. We use HTML canvas element to transfer cv.Mat to the web or in reverse.
+        The ImageData interface can represent or set the underlying pixel data of an area of a canvas element.
+    </p>
+    <p>Because canvas only support 8-bit RGBA image with continuous storage, the cv.Mat type is cv.CV_8UC4. It is
+        different from native OpenCV because images returned and shown by the native imread and imshow have the channels
+        stored in BGR order.</p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">imageSource</td>
+                        <td>canvas element or id, or img element or id. </td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+
+    <p><b>cv.imshow (canvasSource, mat)</b></p>
+    <p>We use cv.imshow (canvasSource, mat) to display it. The function may scale the mat, depending on its depth:
+
+    </p>
+    <ul>
+        <li>If the mat is 8-bit unsigned, it is displayed as is.</li>
+        <li>If the mat is 16-bit unsigned or 32-bit integer, the pixels are divided by 256. That is, the value range
+            [0,255*256] is mapped to [0,255].</li>
+        <li>If the mat is 32-bit floating-point, the pixel values are multiplied by 255. That is, the value range [0,1]
+            is mapped to [0,255].</li>
+    </ul>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">canvasSource</td>
+                        <td>canvas element or id. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">mat</td>
+                        <td>mat to be shown.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+
+    <p><b>cv.imread (imageSource)</b></p>
+    <p>We use cv.imread (imageSource) to read an image from html canvas or img element.</p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">imageSource</td>
+                        <td>canvas element or id, or img element or id. </td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+    <dl class="section return">
+        <dt>Returns</dt>
+        <dd>mat with channels stored in RGBA order.</dd>
+    </dl>
+
+    <p><b>cv.VideoCapture (videoSource)</b></p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">videoSource</td>
+                        <td>the video id or element. </td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+    <dl class="section return">
+        <dt>Returns</dt>
+        <dd><a class="el" href="../../d8/dfe/classcv_1_1VideoCapture.html"
+                title="Class for video capturing from video files, image sequences or cameras. ">cv.VideoCapture</a>
+            instance</dd>
+    </dl>
+
+    <p><b>read(image)</b></p>
+    <p>We use read (image) to get one frame of the video. For performance reasons, the image should be constructed with
+        cv.CV_8UC4 type and same size as the video.</p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">image</td>
+                        <td>image with cv.CV_8UC4 type and same size as the video.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+
+    <p><b>cv.BackgroundSubtractorMOG2 (history = 500, varThreshold = 16, detectShadows = true)</b></p>
+    <p>It is a Gaussian Mixture-based Background/Foreground Segmentation Algorithm. It is based on two papers by
+        Z.Zivkovic, "Improved adaptive Gaussian mixture model for background subtraction" in 2004 and "Efficient
+        Adaptive Density Estimation per Image Pixel for the Task of Background Subtraction" in 2006. One important
+        feature of this algorithm is that it selects the appropriate number of gaussian distribution for each pixel. It
+        provides better adaptibility to varying scenes due illumination changes etc.</p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">history</td>
+                        <td>Length of the history. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">varThreshold</td>
+                        <td>Threshold on the squared distance between the pixel and the sample to decide whether a pixel
+                            is close to that sample. This parameter does not affect the background update. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">detectShadows</td>
+                        <td>If true, the algorithm will detect shadows and mark them. It decreases the speed a bit, so
+                            if you do not need this feature, set the parameter to false. </td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+    <dl class="section return">
+        <dt>Returns</dt>
+        <dd>instance of <a class="el" href="../../d7/d7b/classcv_1_1BackgroundSubtractorMOG2.html"
+                title="Gaussian Mixture-based Background/Foreground Segmentation Algorithm. ">cv.BackgroundSubtractorMOG2</a>
+        </dd>
+    </dl>
+    <dl class="section note">
+        <dt>Note</dt>
+        <dd>The instance of <a class="el" href="../../d7/d7b/classcv_1_1BackgroundSubtractorMOG2.html"
+                title="Gaussian Mixture-based Background/Foreground Segmentation Algorithm. ">cv.BackgroundSubtractorMOG2</a>
+            should be deleted manually.</dd>
+    </dl>
+
+    <p><b>apply (image, fgmask, learningRate = -1)</b></p>
+    <p>Use apply (image, fgmask, learningRate = -1) method to get the foreground mask</p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">image</td>
+                        <td>Next video frame. Floating point frame will be used without scaling and should be in range
+                            [0,255]. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">fgmask</td>
+                        <td>The output foreground mask as an 8-bit binary image. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">learningRate</td>
+                        <td>The value between 0 and 1 that indicates how fast the background model is learnt. Negative
+                            parameter value makes the algorithm to use some automatically chosen learning rate. 0 means
+                            that the background model is not updated at all, 1 means that the background model is
+                            completely reinitialized from the last frame.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+
+
+    <p><b>cv.findContours (image, contours, hierarchy, mode,
+            method, offset = new cv.Point(0, 0))</b> </p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">image</td>
+                        <td>source, an 8-bit single-channel image. Non-zero pixels are treated as 1's. Zero pixels
+                            remain 0's, so the image is treated as binary. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">contours</td>
+                        <td>detected contours. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">hierarchy</td>
+                        <td>containing information about the image topology. It has as many elements as the number of
+                            contours. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">mode</td>
+                        <td>contour retrieval mode(see <a class="el"
+                                href="../../d3/dc0/group__imgproc__shape.html#ga819779b9857cc2f8601e6526a3a5bc71"
+                                title="mode of the contour retrieval algorithm ">cv.RetrievalModes</a>). </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">method</td>
+                        <td>contour approximation method(see <a class="el"
+                                href="../../d3/dc0/group__imgproc__shape.html#ga4303f45752694956374734a03c54d5ff"
+                                title="the contour approximation algorithm ">cv.ContourApproximationModes</a>). </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">offset</td>
+                        <td>optional offset by which every contour point is shifted. This is useful if the contours are
+                            extracted from the image ROI and then they should be analyzed in the whole image context.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+    <p><b> cv.drawContours (image, contours, contourIdx,
+            color, thickness = 1, lineType = <a class="el"
+                href="../../d0/de1/group__core.html#ggaf076ef45de481ac96e0ab3dc2c29a777a5d32eda7017db273a37f158e5b51442a"
+                title="8-connected line ">cv.LINE_8</a>, hierarchy = new <a class="el"
+                href="../../d3/d63/classcv_1_1Mat.html" title="n-dimensional dense array class ">cv.Mat()</a>, maxLevel
+            = INT_MAX, offset = new cv.Point(0, 0))</b> </p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">image</td>
+                        <td>destination image. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">contours</td>
+                        <td>all the input contours. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">contourIdx</td>
+                        <td>parameter indicating a contour to draw. If it is negative, all the contours are drawn. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">color</td>
+                        <td>color of the contours. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">thickness</td>
+                        <td>thickness of lines the contours are drawn with. If it is negative, the contour interiors are
+                            drawn. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">lineType</td>
+                        <td>line connectivity(see <a class="el"
+                                href="../../d0/de1/group__core.html#gaf076ef45de481ac96e0ab3dc2c29a777"
+                                title="type of line ">cv.LineTypes</a>). </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">hierarchy</td>
+                        <td>optional information about hierarchy. It is only needed if you want to draw only some of the
+                            contours(see maxLevel).</td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">maxLevel</td>
+                        <td>maximal level for drawn contours. If it is 0, only the specified contour is drawn. If it is
+                            1, the function draws the contour(s) and all the nested contours. If it is 2, the function
+                            draws the contours, all the nested contours, all the nested-to-nested contours, and so on.
+                            This parameter is only taken into account when there is hierarchy available. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">offset</td>
+                        <td>optional contour shift parameter.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+    <p><b>cv.boundingRect
+            (points)</b> </p>
+    <p>It is a straight rectangle, it doesn't consider the rotation of the object. So area of the bounding rectangle
+        won't be minimum.</p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">points</td>
+                        <td>input 2D point set.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+    <br>
+    <h3><b>ERRO:</b> Quando não se tem uma quantidade de contorno e mesmo assim tenta processar,
+        tenta desenhar.</h3>
+    <p>TypeError: Cannot read property '$$' of undefined
+        at RegisteredPointer.nonConstNoSmartPtrRawPointerToWireType [as toWireType]
+        (http://localhost:8080/PDS/js/opencv.js:24:8204904)
+        at Object.boundingRect (eval at new_ (http://localhost:8080/PDS/js/opencv.js:1:1), :7:26)
+        at eval (eval at Utils.executeCode (http://localhost:8080/PDS/js/utils.js:68:13), :12:15)
+        at Utils.executeCode (http://localhost:8080/PDS/js/utils.js:68:13)
+        at HTMLButtonElement. (http://localhost:8080/PDS/reproVideo.html:86:19)</p>
+
+    <p><b>cv.circle (img, center, radius, color, thickness = 1, lineType = cv.LINE_8, shift = 0)</b> </p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">img</td>
+                        <td>image where the circle is drawn. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">center</td>
+                        <td>center of the circle. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">radius</td>
+                        <td>radius of the circle. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">color</td>
+                        <td>circle color. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">thickness</td>
+                        <td>thickness of the circle outline, if positive. Negative thickness means that a filled circle
+                            is to be drawn. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">lineType</td>
+                        <td>type of the circle boundary. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">shift</td>
+                        <td>number of fractional bits in the coordinates of the center and in the radius value.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+
+    <p><b>cv.rectangle( img, pt1, pt2, color[, thickness[, lineType[, shift]]])</b> </p>
+    <dl class="params">
+        <dt>Parameters</dt>
+        <dd>
+            <table class="params">
+                <tbody>
+                    <tr>
+                        <td class="paramname">img</td>
+                        <td>Image. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">pt1</td>
+                        <td>Vertex of the rectangle. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">pt2</td>
+                        <td>Vertex of the rectangle opposite to pt1 . </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">color</td>
+                        <td>Rectangle color or brightness (grayscale image). </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">thickness</td>
+                        <td>Thickness of lines that make up the rectangle. Negative values, like <a class="el"
+                                href="../../d0/de1/group__core.html#ggaf076ef45de481ac96e0ab3dc2c29a777a89c5f6beef080e6df347167f85e07b9e">FILLED</a>,
+                            mean that the function has to draw a filled rectangle. </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">lineType</td>
+                        <td>Type of the line. See <a class="el"
+                                href="../../d0/de1/group__core.html#gaf076ef45de481ac96e0ab3dc2c29a777"
+                                title="type of line ">LineTypes</a> </td>
+                    </tr>
+                    <tr>
+                        <td class="paramname">shift</td>
+                        <td>Number of fractional bits in the point coordinates. </td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+
+</body>
+
+</html>

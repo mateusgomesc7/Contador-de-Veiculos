@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello OpenCV.js</title>
+</head>
+
+<body>
+    <h2>Hello OpenCV.js</h2>
+    <p id="status">OpenCV.js is loading...</p>
+    <div>
+        <div class="inputoutput">
+            <img id="imageSrc" src="lena.png" alt="Image" style="display: none"/>
+            <canvas id="myCanvas" width="420" height="420" style="border:1px solid #d3d3d3;"></canvas>
+        </div>
+        <div class="inputoutput">
+            <canvas id="canvasOutput"></canvas>
+            <div class="caption">canvasOutput</div>
+        </div>
+        <button onclick="oi()">Vai</button>
+    </div>
+    <script type="text/javascript">
+        let imgElement = document.getElementById('imageSrc');
+        let inputElement = document.getElementById('fileInput');
+
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        var img = document.getElementById("imageSrc");
+        ctx.drawImage(img, 10, 10,);
+
+        function oi() {
+            let mat = cv.imread(imgElement);
+            let dst = new cv.Mat();
+            cv.cvtColor(mat, dst, cv.COLOR_RGBA2GRAY);
+            cv.imshow('canvasOutput', dst);
+            mat.delete();
+            dst.delete();
+        };
+
+        function onOpenCvReady() {
+            document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
+        }
+    </script>
+    <script async src="js/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+</body>
+
+</html>
