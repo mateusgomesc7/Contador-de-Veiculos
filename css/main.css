@@ -299,6 +299,7 @@ transform: rotate(45deg) translate(-8px, -8px);
     body {
         margin: 0;
         display: grid;
+        width: 150%;
         grid-template-columns: 100%;
         grid-template-rows: 20% 5% 5% auto 10%;
         grid-template-areas: 
@@ -315,8 +316,14 @@ transform: rotate(45deg) translate(-8px, -8px);
     
     header h1.noCentro {
         display: block;
-        font-size: 340%;
-        right: 2%;
+        font-size: 300%;
+        right: 10%;
+        width: 65%;
+    }
+
+    main {
+        justify-content: right;
+        padding-left: 4%;
     }
 
     .localButton {
@@ -337,5 +344,16 @@ transform: rotate(45deg) translate(-8px, -8px);
 
     textarea {
         width: 432px;
+    }
+
+    canvas {
+        width: 320px;
+        height: 180px;
+    }
+
+    .container {
+        display: inline-block;
+        cursor: pointer;
+        margin: 10px auto auto 5%;
     }
 }
